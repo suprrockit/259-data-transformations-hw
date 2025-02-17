@@ -1,5 +1,5 @@
 #PSYC 259 Homework 2 - Data Transformation
-#For full credit, provide answers for at least 7/10
+#For full credit, provide answers for at least 7/10 (10/10)
 
 #List names of students collaborating with: 
 
@@ -36,6 +36,8 @@ typeof(ds$Year)
 ds <- ds %>%
   rename(rank = Rank, song = Song, artist = Artist, year = Year)
 
+#Mcomment: You can also do the below
+ds <- ds %>% rename_all(tolower) #one option
 
 ### Question 3 ----------
 
@@ -84,6 +86,8 @@ top10
 
 ds_sum <- ds %>% summarize(Average = round(mean(year)), Oldest = min(year), Newest = max(year))
 
+#Mcomment: Looks good! In the key it also includes na.rm=T, though I know you dealt with in Q1 with the str_replace_all
+
 ### Question 7 ----------###year Question 7 ----------
 
 # Use filter to find out the artists/song titles for the earliest, most 
@@ -108,7 +112,7 @@ ds %>%
 
 #ANSWER
 
-ifelse(ds$song == "Brass in Pocket", ds$year == 1979, ds$year == ds$year)
+ifelse(ds$song == "Brass in Pocket", ds$year == 1979, ds$year == ds$year) #MComment: I don't believe this updated without ds <- at the beginning
 ds <- ds %>% 
   mutate(decade = (10 * floor(year/10)))
 ds_sum <- ds %>% summarize(Average = round(mean(year)), Oldest = min(year), Newest = max(year))
